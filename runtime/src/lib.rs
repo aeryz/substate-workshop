@@ -40,8 +40,9 @@ use pallet_transaction_payment::CurrencyAdapter;
 pub use sp_runtime::BuildStorage;
 pub use sp_runtime::{Perbill, Permill};
 
-/// Import the template pallet.
+/// Import local pallets.
 pub use pallet_template;
+pub use pallet_kitties;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -110,7 +111,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 /// up by `pallet_aura` to implement `fn slot_duration()`.
 ///
 /// Change this to adjust the block time.
-pub const MILLISECS_PER_BLOCK: u64 = 6000;
+pub const MILLISECS_PER_BLOCK: u64 = 2000;
 
 // NOTE: Currently it is not possible to change the slot duration after the chain has started.
 //       Attempting to do so will brick block production.
@@ -279,6 +280,9 @@ impl pallet_template::Config for Runtime {
 	type Event = Event;
 }
 
+impl pallet_kitties::Config for Runtime {
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -294,8 +298,9 @@ construct_runtime!(
 		Balances: pallet_balances,
 		TransactionPayment: pallet_transaction_payment,
 		Sudo: pallet_sudo,
-		// Include the custom logic from the pallet-template in the runtime.
+		// Include the custom logic from the local pallets in the runtime.
 		TemplateModule: pallet_template,
+		Kitties: pallet_kitties,
 	}
 );
 
