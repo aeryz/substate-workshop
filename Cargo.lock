@@ -3560,8 +3560,11 @@ version = "4.0.0-dev"
 dependencies = [
  "frame-support",
  "frame-system",
+ "pallet-randomness-collective-flip",
  "parity-scale-codec",
  "scale-info",
+ "sp-io",
+ "sp-runtime",
 ]
 
 [[package]]
